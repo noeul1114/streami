@@ -23,7 +23,7 @@ if args.text:
     try:
         file = open(text_file_dir, "r")
     except (FileExistsError, OSError):
-        raise Exception(f"Cannot open file: {args.text}")
+        raise Exception("Cannot open file")
 
     PLAY_TYPE = 2  # 열린다면 2번째 방법으로 플레이
 
