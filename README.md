@@ -1,7 +1,12 @@
 # Streami BE dev assignment : Park Hyung Seok
 Conway's Game of Life 구현
 
+#### Windows 10 Pro + Docker Ubuntu 16.04 based Container
 ![Result](https://media.giphy.com/media/lS21FOMtJqrN2smc47/giphy.gif)
+<br>
+
+#### Ubuntu 18.04 Bionic Beaver + Docker Ubuntu 16.04 based Container
+![Result](https://media.giphy.com/media/Qy2sMWHkPHgGAwpFzl/giphy.gif)
 
 
 해당 과제를 수행하는데 사용한 스택은 아래와 같습니다.
