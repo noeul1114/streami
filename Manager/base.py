@@ -27,17 +27,18 @@ class Manager:
             self.point_list = None
             self.width = 80
             self.height = 40
+
         self.grid = np.zeros([self.width,self.height])
         self.grid_pad = np.zeros([self.width+2,self.height+2])
 
-        self.point_list_temp = deque()
+        # counter 설정.
+        self.c = 0
 
-        self.c = 0              # counter 설정.
-
-        self.root = Tk()        # 기본 윈도우 설정
+        # 기본 윈도우 설정
+        self.root = Tk()
         self.root.title("Streami Back-End assignment")
 
-        # 한칸의 크기는 7*7 이며 각각의 간격은 3픽셀로 하드코딩 되어있음.
+        # 한칸의 크기는 9*9 이며 각각의 간격은 1픽셀로 하드코딩 되어있음.
         # 이에 따라 맞는 캔버스 크기 설정
         self.canvas = Canvas(self.root,
                              width=self.width*10+5,
@@ -47,12 +48,14 @@ class Manager:
         # 기본 바탕이 되는 픽셀들 그리기.
         self.draw_base_grid()
 
+        # point list 들 초기화
+        self.point_list_temp = deque()
         if self.point_list:
             pass
         else:
             self.point_list_init()
 
-        # 초기화된, 혹은 입력받은 point_list로 캔버스 덮어씌우기.
+        # 초기화된, 혹은 입력받은 point list 로 캔버스 덮어씌우기.
         self.draw_point()
 
         self.tick()
@@ -61,23 +64,23 @@ class Manager:
     # main tick function
     def tick(self):
         if self.c != 0:
-            self.accumulate()
-            self.trim()
-            self.populated()
-            self.empty()
+            # 메인 루프
+            self.accumulate()       # 모든 점들에 대해서 neighbor 검사 진행
+            self.trim()             # neighbor 이 있는 점들을 기존의 populated 와 empty 로 분리
+            self.populated()        # populated 점들에 대해 생존 검사 진행
+            self.empty()            # empty 점들에 대해 populated 검사 진행
 
-            self.redraw()
+            self.redraw()           # 결과를 베이스로 canvas redraw
 
         self.c += 1
         if self.c == 10000:                     # 카운터가 10000초에 도달하면 정지.
-            print(f"Counter {self.c} reached.")
+            print("Counter reached.")
         else:
             self.canvas.after(1, self.tick)
 
     # point_list 가 존재하지 않을때 random initialize 하는 함수
     def point_list_init(self):
         self.point_list = deque()
-
         for x in range(self.width):
             for y in range(self.height):
                 if random.random() < 0.5:
@@ -119,7 +122,6 @@ class Manager:
     # 1 이상의 값을 가지는 모든 empty 점들에 대해서
     # populate 되는지 검사
     def empty(self):
-        temp = deque()
         for p in range(len(self.point_list_temp)):
             t = self.point_list_temp.pop()
             x, y = t.x, t.y
