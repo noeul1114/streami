@@ -1,0 +1,5 @@
+dataclasses==0.6
+numpy==1.17.2
+six==1.11.0
+terminaltables==3.1.0
+virtualenv==16.7.9

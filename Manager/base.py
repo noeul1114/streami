@@ -50,9 +50,7 @@ class Manager:
 
         # point list 들 초기화
         self.point_list_temp = deque()
-        if self.point_list:
-            pass
-        else:
+        if not self.point_list:
             self.point_list_init()
 
         # 초기화된, 혹은 입력받은 point list 로 캔버스 덮어씌우기.
