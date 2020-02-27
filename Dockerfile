@@ -12,6 +12,7 @@ RUN git clone https://github.com/noeul1114/streami.git
 WORKDIR /home/streami
 RUN git fetch --all && git reset --hard && git pull
 
-RUN pip install -r requirements.txt
+
+RUN pip3 install -r requirements.txt
 
 CMD bash -c "python3 main.py"
