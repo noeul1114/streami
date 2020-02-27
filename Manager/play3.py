@@ -24,7 +24,8 @@ class PlayManager3:
             self.point_list = kwargs['list']
             self.width = kwargs['width']
             self.height = kwargs['height']
-            self.limit_gen = kwargs['gen']
+            self.limit_gen = int(kwargs['gen'])
+            self.cwd = kwargs['cwd']
         except (ValueError, Exception):
             raise Exception("Incorrect input with kwargs")
 
@@ -39,7 +40,10 @@ class PlayManager3:
         if not self.point_list:
             self.point_list_init()
 
-        self.tick()
+        self.hit_limit = False
+
+        while not self.hit_limit:
+            self.tick()
 
     # main tick function
     def tick(self):
@@ -51,11 +55,15 @@ class PlayManager3:
             self.empty()            # empty 점들에 대해 populated 검사 진행
 
         self.c += 1
-        if self.c == self.limit_gen:                     # 카운터가 10000초에 도달하면 정지.
+        if self.c == self.limit_gen:                     # 카운터가 limit generation 에 도달하면 정지.
             print("Counter reached.... Exporting txt file")
-            open(os.path.join())
-        else:
-            self.canvas.after(1, self.tick)
+            output = open(os.path.join(self.cwd, "after_"+str(self.limit_gen) + "_generation.txt"), "w")
+            output.write(str(self.height) + " " + str(self.width) + "\n")
+            output.write(str(len(self.point_list)) + "\n")
+            for i in range(len(self.point_list)):
+                output.write(str(self.point_list[i].x) + " " + str(self.point_list[i].y) + "\n")
+            output.close()
+            self.hit_limit = True
 
     # point_list 가 존재하지 않을때 random initialize 하는 함수
     def point_list_init(self):

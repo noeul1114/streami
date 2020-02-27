@@ -74,7 +74,7 @@ class Manager:
         if self.c == 10000:                     # 카운터가 10000초에 도달하면 정지.
             print("Counter reached.")
         else:
-            self.canvas.after(1, self.tick)
+            self.canvas.after(500, self.tick)
 
     # point_list 가 존재하지 않을때 random initialize 하는 함수
     def point_list_init(self):
