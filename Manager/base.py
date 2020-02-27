@@ -9,6 +9,7 @@ class Point:
         self.x = x
         self.y = y
 
+
 def check(elem, list):
     for i in range(len(list)):
         if list[i].x == elem.x and list[i].y == elem.y:
@@ -44,29 +45,16 @@ class Manager:
         self.canvas.pack()
 
         # 기본 바탕이 되는 픽셀들 그리기.
-        for x in range(self.width):
-            for y in range(self.height):
-                self.canvas.create_rectangle(5 + x * 10,
-                                             5 + y * 10,
-                                             5 + x * 10 + 7,
-                                             5 + y * 10 + 7,
-                                             fill='grey')
+        self.draw_base_grid()
+
         if self.point_list:
             pass
         else:
             self.point_list_init()
 
         # 초기화된, 혹은 입력받은 point_list로 캔버스 덮어씌우기.
-        if self.point_list:
-            for i in range(len(self.point_list)):
-                self.grid[self.point_list[i].x][self.point_list[i].y] = 1
+        self.draw_point()
 
-                self.canvas.create_rectangle(
-                    self.point_list[i].x * 10 + 5,
-                    self.point_list[i].y * 10 + 5,
-                    self.point_list[i].x * 10 + 12,
-                    self.point_list[i].y * 10 + 12,
-                    fill="red")
         self.tick()
         self.root.mainloop()
 
@@ -84,7 +72,7 @@ class Manager:
         if self.c == 10000:                     # 카운터가 10000초에 도달하면 정지.
             print(f"Counter {self.c} reached.")
         else:
-            self.canvas.after(2000, self.tick)
+            self.canvas.after(1, self.tick)
 
     # point_list 가 존재하지 않을때 random initialize 하는 함수
     def point_list_init(self):
@@ -142,13 +130,24 @@ class Manager:
     # 최종적으로 다음 generation 의 Point 들을 기반으로 캔버스를 다시 그리기
     def redraw(self):
         self.canvas.delete(ALL)
+
+        self.draw_base_grid()
+        self.draw_point()
+
+    # 베이스가 되는 그리드 그리기
+    def draw_base_grid(self):
         for x in range(self.width):
             for y in range(self.height):
                 self.canvas.create_rectangle(5 + x * 10,
                                              5 + y * 10,
-                                             5 + x * 10 + 7,
-                                             5 + y * 10 + 7,
-                                             fill='grey')
+                                             5 + x * 10 + 9,
+                                             5 + y * 10 + 9,
+                                             fill='grey',
+                                             outline='white',
+                                             width=0.0)
+
+    # point list 를 기반으로 populated 포인트들을 그리기
+    def draw_point(self):
         if self.point_list:
             for i in range(len(self.point_list)):
                 self.grid[self.point_list[i].x][self.point_list[i].y] = 1
@@ -156,6 +155,8 @@ class Manager:
                 self.canvas.create_rectangle(
                     self.point_list[i].x * 10 + 5,
                     self.point_list[i].y * 10 + 5,
-                    self.point_list[i].x * 10 + 12,
-                    self.point_list[i].y * 10 + 12,
-                    fill="red")
+                    self.point_list[i].x * 10 + 14,
+                    self.point_list[i].y * 10 + 14,
+                    fill="red",
+                    outline='white',
+                    width=0.0)
