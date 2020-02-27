@@ -18,6 +18,7 @@ def check(elem, list):
     return False
 
 
+# 기존 base.py 모듈과 다르게 시각화 관련 함수는 모두 제거
 class PlayManager3:
     def __init__(self, **kwargs):
         try:
