@@ -60,6 +60,7 @@ Dockerfile 내부를 참고하여 주십시요.
    - 좌표들을 기반으로 그리드 redraw
    
    ++ 총 세가지 방법으로 구동할 수 있어야 하는데, 세번째 방법은 위의 알고리즘에서 시각화 코드만 제외하고 구동하는 형식으로 구현하였습니다.
+   
    ++ 주요 알고리즘 코드는 Manager 패키지 안의 **base.py** 그리고 세번째 방법 구동 코드는 **play3.py** 에 구현되어 있습니다.
    
 <br>
@@ -74,6 +75,7 @@ Ubuntu 환경
 
 ```
 git clone https://github.com/noeul1114/streami.git
+cd streami
 ```
 명령어를 통해 Repo를 복사한 이후, 
 <br>
