@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 import numpy as np
+from collections import deque
 
 
 class Point:
@@ -49,13 +50,15 @@ class Manager:
         # 초기화된, 혹은 입력받은 point_list로 캔버스 덮어씌우기.
         if self.point_list:
             for i in range(len(self.point_list)):
+                self.grid[self.point_list[i].x][self.point_list[i].y] = 1
+
                 self.canvas.create_rectangle(
                     self.point_list[i].x * 10 + 5,
                     self.point_list[i].y * 10 + 5,
                     self.point_list[i].x * 10 + 12,
                     self.point_list[i].y * 10 + 12,
                     fill="red")
-
+        print(self.grid)
         self.tick()
         self.root.mainloop()
 
@@ -74,7 +77,7 @@ class Manager:
 
     # point_list 가 존재하지 않을때 random initialize 하는 함수
     def point_list_init(self):
-        self.point_list = []
+        self.point_list = deque()
         for x in range(self.width):
             for y in range(self.height):
                 if random.random() < 0.5:

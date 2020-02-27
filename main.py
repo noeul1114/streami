@@ -2,6 +2,7 @@ import os
 import argparse
 
 from Manager.base import Manager, Point
+from collections import deque
 
 # Optional args 추가
 parser = argparse.ArgumentParser()
@@ -13,7 +14,7 @@ args = parser.parse_args()
 # 기본적으로 입력이 없을 경우 플레이 방법은 1
 PLAY_TYPE = 1
 
-initial_cell_list = []
+initial_cell_list = deque()
 NUM_ROWS, NUM_COLS = 80, 40
 
 # Input txt 파일이 정상적으로 열리는지 확인.
