@@ -72,21 +72,19 @@ class Manager:
 
     # main tick function
     def tick(self):
-        self.canvas.create_rectangle(5+self.c*10,
-                                     5+self.c*10,
-                                     5+self.c*10+7,
-                                     5+self.c*10+7,
-                                     fill='red')
+        if self.c != 0:
+            self.accumulate()
+            self.trim()
+            self.populated()
+            self.empty()
 
-        self.accumulate()
-        self.trim()
-
+            self.redraw()
 
         self.c += 1
         if self.c == 10000:                     # 카운터가 10000초에 도달하면 정지.
             print(f"Counter {self.c} reached.")
         else:
-            self.canvas.after(1000, self.tick)
+            self.canvas.after(2000, self.tick)
 
     # point_list 가 존재하지 않을때 random initialize 하는 함수
     def point_list_init(self):
@@ -103,10 +101,11 @@ class Manager:
         for p in self.point_list:
             for x in range(-1,2):
                 for y in range(-1,2):
-                    print(x,y)
                     self.grid_pad[p.x+x+1][p.y+y+1] += 1
             self.grid_pad[p.x+1][p.y+1] -= 1
 
+    # 그리드의 값이 1 이상인 모든 칸을 검사하며,
+    # 기존의 Point list 에 존재하지 않는 포인트들 수집
     def trim(self):
         self.point_list_temp = deque()
         for x in range(self.width):
@@ -115,4 +114,48 @@ class Manager:
                     if not check(Point(x,y), self.point_list):
                         self.point_list_temp.append(Point(x,y))
 
+    # Populated 된 점들의 생존 여부를 검사
+    def populated(self):
+        temp = deque()
+        for p in range(len(self.point_list)):
+            t = self.point_list.pop()
+            x, y = t.x, t.y
+            if self.grid_pad[x+1][y+1] <= 1:
+                pass
+            if self.grid_pad[x+1][y+1] >= 4:
+                pass
+            if self.grid_pad[x+1][y+1] == 2 or self.grid_pad[x+1][y+1] == 3:
+                temp.append(t)
+        self.point_list = temp
 
+    # 1 이상의 값을 가지는 모든 empty 점들에 대해서
+    # populate 되는지 검사
+    def empty(self):
+        temp = deque()
+        for p in range(len(self.point_list_temp)):
+            t = self.point_list_temp.pop()
+            x, y = t.x, t.y
+
+            if self.grid_pad[x+1][y+1] == 3:
+                self.point_list.append(t)
+
+    # 최종적으로 다음 generation 의 Point 들을 기반으로 캔버스를 다시 그리기
+    def redraw(self):
+        self.canvas.delete(ALL)
+        for x in range(self.width):
+            for y in range(self.height):
+                self.canvas.create_rectangle(5 + x * 10,
+                                             5 + y * 10,
+                                             5 + x * 10 + 7,
+                                             5 + y * 10 + 7,
+                                             fill='grey')
+        if self.point_list:
+            for i in range(len(self.point_list)):
+                self.grid[self.point_list[i].x][self.point_list[i].y] = 1
+
+                self.canvas.create_rectangle(
+                    self.point_list[i].x * 10 + 5,
+                    self.point_list[i].y * 10 + 5,
+                    self.point_list[i].x * 10 + 12,
+                    self.point_list[i].y * 10 + 12,
+                    fill="red")
