@@ -1,4 +1,6 @@
 from tkinter import *
+import random
+import numpy as np
 
 
 class Point:
@@ -17,6 +19,8 @@ class Manager:
             self.point_list = None
             self.width = 80
             self.height = 40
+        self.grid = np.zeros([80,40])
+
         self.c = 0              # counter 설정.
 
         self.root = Tk()        # 기본 윈도우 설정
@@ -37,11 +41,14 @@ class Manager:
                                              5 + x * 10 + 7,
                                              5 + y * 10 + 7,
                                              fill='grey')
+        if self.point_list:
+            pass
+        else:
+            self.point_list_init()
 
-        # 입력받은 point_list 가 존재한다면 해당 값들을 초기화.
+        # 초기화된, 혹은 입력받은 point_list로 캔버스 덮어씌우기.
         if self.point_list:
             for i in range(len(self.point_list)):
-                print(self.point_list[i].x, self.point_list[i].y)
                 self.canvas.create_rectangle(
                     self.point_list[i].x * 10 + 5,
                     self.point_list[i].y * 10 + 5,
@@ -49,14 +56,11 @@ class Manager:
                     self.point_list[i].y * 10 + 12,
                     fill="red")
 
-        if self.point_list:
-            self.tick_with_init()
-        else:
-            self.tick_random()
+        self.tick()
         self.root.mainloop()
 
-    # mainloop 내에서 작동되는 작업. 1초마다 카운터를 증가시키며, 시간 간격마다 캔버스를 다시 그림.
-    def tick_random(self):
+    # main tick function
+    def tick(self):
         self.canvas.create_rectangle(5+self.c*10,
                                      5+self.c*10,
                                      5+self.c*10+7,
@@ -66,16 +70,12 @@ class Manager:
         if self.c == 10000:
             print(f"Counter {self.c} reached.")
         else:
-            self.canvas.after(1000, self.tick_random)
+            self.canvas.after(1000, self.tick)
 
-    def tick_with_init(self):
-        self.canvas.create_rectangle(5+self.c*10,
-                                     5+self.c*10,
-                                     5+self.c*10+7,
-                                     5+self.c*10+7,
-                                     fill='red')
-        self.c += 1
-        if self.c == 10000:
-            print(f"Counter {self.c} reached.")
-        else:
-            self.canvas.after(1000, self.tick_with_init)
+    # point_list 가 존재하지 않을때 random initialize 하는 함수
+    def point_list_init(self):
+        self.point_list = []
+        for x in range(self.width):
+            for y in range(self.height):
+                if random.random() < 0.5:
+                    self.point_list.append(Point(x,y))
