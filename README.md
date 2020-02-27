@@ -69,7 +69,8 @@ Dockerfile 내부를 참고하여 주십시요.
 
 ## 구동방법
 
-###Ubuntu 환경
+Ubuntu 환경
+---
 
 ```
 git clone https://github.com/noeul1114/streami.git
@@ -111,7 +112,8 @@ python3 main.py plux.txt 10
 ``` 
 
 
-###Windows 환경
+Windows 환경
+---
 
 
 Xming이 설치되어있고, 구동중이어야 합니다.
@@ -128,7 +130,8 @@ Xming이 설치되어있고, 구동중이어야 합니다.
 <br>
 <br>
 
-##추가사항
+추가사항
+---
 
 - 상기에서 언급했듯 개인적으로 네이티브한 Ubuntu 16.04 Host 환경 구축 할 여건이 되지 않아 Ubuntu 18.04 Desktop 으로 테스트해보았습니다.
 - git repo 상단에 있는 gif 의 새로고침 속도는 gif 를 위해 속도 제한을 걸지 않은 상태입니다. gif 와 달리 실제 프로그램의 그리드 새로고침 속도는 0.5초로 설정되어 있습니다.
