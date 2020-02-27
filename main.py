@@ -29,7 +29,7 @@ if args.text:
     # 첫번째 줄의 NUM_COLS, NUM_ROWS 추출
     tmp = file.readline()
     tmp = tmp.split(" ")
-    NUM_ROWS, NUM_COLS = int(tmp[0]), int(tmp[1].rstrip())
+    NUM_COLS, NUM_ROWS = int(tmp[0]), int(tmp[1].rstrip())
 
     # 두번째 줄의 NUM_CELLS_INIT
     tmp = file.readline()
@@ -51,6 +51,6 @@ if __name__ == "__main__":
         Manager()
     elif PLAY_TYPE == 2:
         # print('PLAY_TYPE = 2')
-        Manager(list=initial_cell_list)
+        Manager(list=initial_cell_list, width=NUM_ROWS, height=NUM_COLS)
     elif PLAY_TYPE == 3:
         print('PLAY_TYPE = 3')

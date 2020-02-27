@@ -1,8 +1,5 @@
 from tkinter import *
 
-# 따로 입력이 없을때의 default width/height
-width = 80
-height = 40
 
 class Point:
     def __init__(self, x, y):
@@ -14,8 +11,12 @@ class Manager:
     def __init__(self, **kwargs):
         try:
             self.point_list = kwargs['list']
+            self.width = kwargs['width']
+            self.height = kwargs['height']
         except:
             self.point_list = None
+            self.width = 80
+            self.height = 40
         self.c = 0              # counter 설정.
 
         self.root = Tk()        # 기본 윈도우 설정
@@ -24,13 +25,13 @@ class Manager:
         # 한칸의 크기는 7*7 이며 각각의 간격은 3픽셀로 하드코딩 되어있음.
         # 이에 따라 맞는 캔버스 크기 설정
         self.canvas = Canvas(self.root,
-                             width=width*10+5,
-                             height=height*10+5)
+                             width=self.width*10+5,
+                             height=self.height*10+5)
         self.canvas.pack()
 
         # 기본 바탕이 되는 픽셀들 그리기.
-        for x in range(width):
-            for y in range(height):
+        for x in range(self.width):
+            for y in range(self.height):
                 self.canvas.create_rectangle(5 + x * 10,
                                              5 + y * 10,
                                              5 + x * 10 + 7,
