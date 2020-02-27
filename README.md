@@ -1,7 +1,7 @@
 # Streami BE dev assignment : Park Hyung Seok
 Conway's Game of Life 구현
 
-![](Animated GIF-source.gif)
+![Result](https://media.giphy.com/media/lS21FOMtJqrN2smc47/giphy.gif)
 
 
 해당 과제를 수행하는데 사용한 스택은 아래와 같습니다.
