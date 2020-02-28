@@ -3,6 +3,9 @@ import random
 import numpy as np
 from collections import deque
 
+CANVAS_PADDING = 5
+BOX_SIZE = 9
+
 
 class Point:
     def __init__(self, x, y):
@@ -138,10 +141,10 @@ class Manager:
     def draw_base_grid(self):
         for x in range(self.width):
             for y in range(self.height):
-                self.canvas.create_rectangle(5 + x * 10,
-                                             5 + y * 10,
-                                             5 + x * 10 + 9,
-                                             5 + y * 10 + 9,
+                self.canvas.create_rectangle(x * 10 + CANVAS_PADDING,
+                                             y * 10 + CANVAS_PADDING,
+                                             x * 10 + CANVAS_PADDING + BOX_SIZE,
+                                             y * 10 + CANVAS_PADDING + BOX_SIZE,
                                              fill='grey',
                                              outline='white',
                                              width=0.0)
@@ -153,10 +156,10 @@ class Manager:
                 self.grid[self.point_list[i].x][self.point_list[i].y] = 1
 
                 self.canvas.create_rectangle(
-                    self.point_list[i].x * 10 + 5,
-                    self.point_list[i].y * 10 + 5,
-                    self.point_list[i].x * 10 + 14,
-                    self.point_list[i].y * 10 + 14,
+                    self.point_list[i].x * 10 + CANVAS_PADDING,
+                    self.point_list[i].y * 10 + CANVAS_PADDING,
+                    self.point_list[i].x * 10 + CANVAS_PADDING + BOX_SIZE,
+                    self.point_list[i].y * 10 + CANVAS_PADDING + BOX_SIZE,
                     fill="red",
                     outline='white',
                     width=0.0)

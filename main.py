@@ -54,7 +54,9 @@ if __name__ == "__main__":
         Manager()
     elif PLAY_TYPE == 2:
         # print('PLAY_TYPE = 2')
-        Manager(list=initial_cell_list, width=NUM_ROWS, height=NUM_COLS)
+        Manager(list=initial_cell_list,
+                width=NUM_ROWS,
+                height=NUM_COLS)
     elif PLAY_TYPE == 3:
         PlayManager3(list=initial_cell_list,
                      width=NUM_ROWS,
