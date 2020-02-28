@@ -124,7 +124,7 @@ Xming이 설치되어있고, 구동중이어야 합니다.
 내부 ip를 아래 코드의 <HOST_IP> 에 수정하여 넣으면 실행가능합니다.
 
 ```
- docker container run -it --rm -e DISPLAY=<HOST_IP>:0.0 willypower/streami:latest
+ docker container run -it --rm -e DISPLAY=<HOST_IP>:0.0 willypower/streami:latest bash
 ```
 <br>
 <br>
