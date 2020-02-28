@@ -137,7 +137,8 @@ Xming이 설치되어있고, 구동중이어야 합니다.
 ---
 
 - 상기에서 언급했듯 개인적으로 네이티브한 Ubuntu 16.04 Host 환경 구축 할 여건이 되지 않아 Ubuntu 18.04 Desktop 으로 테스트해보았습니다.
-- git repo 상단에 있는 gif 의 새로고침 속도는 gif 를 위해 속도 제한을 걸지 않은 상태입니다. gif 와 달리 실제 프로그램의 그리드 새로고침 속도는 0.5초로 설정되어 있습니다.
+- git repo 상단에 있는 gif 의 새로고침 속도는 gif 를 위해 속도 제한을 걸지 않은 상태입니다. Populate 되는 점들의 양상이 발산하거나, 수렴하는 것을 빠르게 보여주기 위해 속도에 제한을 걸지 않았습니다.
+- gif 와 달리 실제 프로그램의 그리드 새로고침 속도는 0.5초로 설정되어 있습니다.
 - 16.04 환경을 구축하지 못하는 관계로 WSL 에서 16.04 네이티브 환경을 구축하고 그 위에서 Docker 를 구동하고 싶었는데, WSL 내에서의 docker 사용은 windows insider 프리뷰를 구축해야 해서 포기했습니다. ㅠㅠ
 - 3번째 구동방법에서 txt 파일의 이름은 **after_<input_gen>_generation.txt** 입니다.
 - 빌드된 Docker 이미지의 주소는 https://hub.docker.com/repository/docker/willypower/streami 입니다.
