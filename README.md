@@ -119,13 +119,19 @@ Windows 환경
 ---
 
 
-Xming이 설치되어있고, 구동중이어야 합니다.
+**Xming이 설치되어있고, 구동중이어야 합니다.**
+
+Docker 가 설치되어있어야 하며, Docker Daemon 이 구동중이어야 합니다.
+
+Windows Pro 를 통한 Hyper-V 기반의 Docker 에서 테스트되었습니다. 가상화를 지원하지 않는 Windows Home 혹은 다른 버전에서 Toolbox 기반의 Docker 에서는 테스트되지 않았습니다. 
 
 내부 ip를 아래 코드의 <HOST_IP> 에 수정하여 넣으면 실행가능합니다.
 
 ```
  docker container run -it --rm -e DISPLAY=<HOST_IP>:0.0 willypower/streami:latest bash
 ```
+
+저와 같은 경우는 cmd 내에서 ipconfig 커맨드를 통해 **내부** IP 를 확인한 후 할당하였습니다.
 <br>
 <br>
 <hr>
