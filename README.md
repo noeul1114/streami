@@ -68,10 +68,12 @@ Dockerfile 내부를 참고하여 주십시요.
 
 <hr>
 
-## 구동방법
+# 구동방법
 
 Ubuntu 환경
----
+----
+
+**Docker 가 HOST 에 설치되어 있으며 Docker daemon이 구동중이어야 합니다.**
 
 ```
 git clone https://github.com/noeul1114/streami.git
@@ -105,7 +107,6 @@ Docker Host 에서 컨테이너 내부의 GUI 어플리케이션을 구동하기
 
 실행이 별다른 오류 없이 되었다면, 아래의 커맨드를 통해 프로그램을 구동시킬 수 있습니다.
 
-**!! 위의 sh 파일은 Docker 가 HOST 에 설치되어 있으며 구동중이라는 가정하에 적었습니다.**
 
 ```
 python3 main.py
@@ -137,6 +138,7 @@ Xming이 설치되어있고, 구동중이어야 합니다.
 
 - 상기에서 언급했듯 개인적으로 네이티브한 Ubuntu 16.04 Host 환경 구축 할 여건이 되지 않아 Ubuntu 18.04 Desktop 으로 테스트해보았습니다.
 - git repo 상단에 있는 gif 의 새로고침 속도는 gif 를 위해 속도 제한을 걸지 않은 상태입니다. gif 와 달리 실제 프로그램의 그리드 새로고침 속도는 0.5초로 설정되어 있습니다.
-- WSL 에서 16.04 네이티브 환경을 구축하고 그 위에서 Docker 를 구동하고 싶었는데, WSL 내에서의 docker 사용은 windows insider 프리뷰를 구축해야 해서 포기했습니다. ㅠㅠ
+- 16.04 환경을 구축하지 못하는 관계로 WSL 에서 16.04 네이티브 환경을 구축하고 그 위에서 Docker 를 구동하고 싶었는데, WSL 내에서의 docker 사용은 windows insider 프리뷰를 구축해야 해서 포기했습니다. ㅠㅠ
 - 3번째 구동방법에서 txt 파일의 이름은 **after_<input_gen>_generation.txt** 입니다.
 - 빌드된 Docker 이미지의 주소는 https://hub.docker.com/repository/docker/willypower/streami 입니다.
+- 첫번째, 즉 입력이 없는 기본적인 실행방법으로는, 기본 80 * 40 그리드 전체좌표에 대해서 각각 50% 확률로 Populate 여부를 결정해서 초기화 한 후 실행됩니다. 
